@@ -1,0 +1,478 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B8060CDB23006E8B006515F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8060CDA23006E8B006515F9 /* AppDelegate.swift */; };
+		B8060CE023006E8B006515F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8060CDE23006E8B006515F9 /* Main.storyboard */; };
+		B8060CE323006E8B006515F9 /* TipOut.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8060CE123006E8B006515F9 /* TipOut.xcdatamodeld */; };
+		B8060CE523006E8C006515F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8060CE423006E8C006515F9 /* Assets.xcassets */; };
+		B8060CE823006E8C006515F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8060CE623006E8C006515F9 /* LaunchScreen.storyboard */; };
+		B8128B1C230287BD00C2920F /* AppFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8128B1B230287BD00C2920F /* AppFormViewController.swift */; };
+		B8CF71152300C3DF005BB50E /* TipOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71142300C3DF005BB50E /* TipOutViewController.swift */; };
+		B8CF71172300C491005BB50E /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71162300C491005BB50E /* AppLabel.swift */; };
+		B8CF711B2300C6D6005BB50E /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF711A2300C6D6005BB50E /* UIFontExtensions.swift */; };
+		B8CF711E2300C92D005BB50E /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF711D2300C92D005BB50E /* AppTextField.swift */; };
+		B8CF71222300CAD4005BB50E /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71212300CAD4005BB50E /* AppButton.swift */; };
+		B8CF71252300D464005BB50E /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71242300D464005BB50E /* AppViewController.swift */; };
+		B8CF71272300D645005BB50E /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71262300D645005BB50E /* UITableViewExtensions.swift */; };
+		B8CF712A2300DCEB005BB50E /* LabelRightDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71292300DCEB005BB50E /* LabelRightDetailCell.swift */; };
+		B8CF712C2300DDEC005BB50E /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF712B2300DDEC005BB50E /* CurrencyTextField.swift */; };
+		B8CF712E23013ABD005BB50E /* PresetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF712D23013ABD005BB50E /* PresetsListViewController.swift */; };
+		B8CF713223013D93005BB50E /* ModalFormContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF713123013D93005BB50E /* ModalFormContainerViewController.swift */; };
+		B8CF71342301424A005BB50E /* SimpleTextFieldFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71332301424A005BB50E /* SimpleTextFieldFormViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B8060CD723006E8B006515F9 /* TipOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8060CDA23006E8B006515F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B8060CDF23006E8B006515F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B8060CE223006E8B006515F9 /* TipOut.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TipOut.xcdatamodel; sourceTree = "<group>"; };
+		B8060CE423006E8C006515F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B8060CE723006E8C006515F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B8060CE923006E8C006515F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8128B1B230287BD00C2920F /* AppFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFormViewController.swift; sourceTree = "<group>"; };
+		B8CF71142300C3DF005BB50E /* TipOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipOutViewController.swift; sourceTree = "<group>"; };
+		B8CF71162300C491005BB50E /* AppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLabel.swift; sourceTree = "<group>"; };
+		B8CF711A2300C6D6005BB50E /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
+		B8CF711D2300C92D005BB50E /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
+		B8CF71212300CAD4005BB50E /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
+		B8CF71242300D464005BB50E /* AppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		B8CF71262300D645005BB50E /* UITableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
+		B8CF71292300DCEB005BB50E /* LabelRightDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelRightDetailCell.swift; sourceTree = "<group>"; };
+		B8CF712B2300DDEC005BB50E /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
+		B8CF712D23013ABD005BB50E /* PresetsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsListViewController.swift; sourceTree = "<group>"; };
+		B8CF713123013D93005BB50E /* ModalFormContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalFormContainerViewController.swift; sourceTree = "<group>"; };
+		B8CF71332301424A005BB50E /* SimpleTextFieldFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTextFieldFormViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B8060CD423006E8B006515F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B8060CCE23006E8B006515F9 = {
+			isa = PBXGroup;
+			children = (
+				B8060CD923006E8B006515F9 /* TipOut */,
+				B8060CD823006E8B006515F9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B8060CD823006E8B006515F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B8060CD723006E8B006515F9 /* TipOut.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B8060CD923006E8B006515F9 /* TipOut */ = {
+			isa = PBXGroup;
+			children = (
+				B8060CDA23006E8B006515F9 /* AppDelegate.swift */,
+				B8060CE423006E8C006515F9 /* Assets.xcassets */,
+				B8060CE923006E8C006515F9 /* Info.plist */,
+				B8060CEF23006FE2006515F9 /* Views */,
+				B8060CF023006FE9006515F9 /* Models */,
+				B8CF71182300C6A2005BB50E /* Util */,
+			);
+			path = TipOut;
+			sourceTree = "<group>";
+		};
+		B8060CEF23006FE2006515F9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8060CF32300701A006515F9 /* Storyboards */,
+				B8060CF223006FF7006515F9 /* CustomViews */,
+				B8060CF123006FF1006515F9 /* ViewControllers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B8060CF023006FE9006515F9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B8060CE123006E8B006515F9 /* TipOut.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B8060CF123006FF1006515F9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B8CF71142300C3DF005BB50E /* TipOutViewController.swift */,
+				B8CF712D23013ABD005BB50E /* PresetsListViewController.swift */,
+				B8CF713123013D93005BB50E /* ModalFormContainerViewController.swift */,
+				B8CF71332301424A005BB50E /* SimpleTextFieldFormViewController.swift */,
+				B8128B1B230287BD00C2920F /* AppFormViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		B8060CF223006FF7006515F9 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				B8CF71282300DCCE005BB50E /* UITableViewCells */,
+				B8CF71162300C491005BB50E /* AppLabel.swift */,
+				B8CF711D2300C92D005BB50E /* AppTextField.swift */,
+				B8CF71212300CAD4005BB50E /* AppButton.swift */,
+				B8CF71242300D464005BB50E /* AppViewController.swift */,
+				B8CF712B2300DDEC005BB50E /* CurrencyTextField.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		B8060CF32300701A006515F9 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				B8060CDE23006E8B006515F9 /* Main.storyboard */,
+				B8060CE623006E8C006515F9 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		B8CF71182300C6A2005BB50E /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				B8CF71232300D441005BB50E /* Protocols */,
+				B8CF71192300C6B5005BB50E /* Extensions */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		B8CF71192300C6B5005BB50E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B8CF711A2300C6D6005BB50E /* UIFontExtensions.swift */,
+				B8CF71262300D645005BB50E /* UITableViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B8CF71232300D441005BB50E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B8CF71282300DCCE005BB50E /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				B8CF71292300DCEB005BB50E /* LabelRightDetailCell.swift */,
+			);
+			path = UITableViewCells;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B8060CD623006E8B006515F9 /* TipOut */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B8060CEC23006E8C006515F9 /* Build configuration list for PBXNativeTarget "TipOut" */;
+			buildPhases = (
+				B8060CD323006E8B006515F9 /* Sources */,
+				B8060CD423006E8B006515F9 /* Frameworks */,
+				B8060CD523006E8B006515F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TipOut;
+			productName = TipOut;
+			productReference = B8060CD723006E8B006515F9 /* TipOut.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B8060CCF23006E8B006515F9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = shayneptorres;
+				TargetAttributes = {
+					B8060CD623006E8B006515F9 = {
+						CreatedOnToolsVersion = 10.3;
+					};
+				};
+			};
+			buildConfigurationList = B8060CD223006E8B006515F9 /* Build configuration list for PBXProject "TipOut" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B8060CCE23006E8B006515F9;
+			productRefGroup = B8060CD823006E8B006515F9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B8060CD623006E8B006515F9 /* TipOut */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B8060CD523006E8B006515F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8060CE823006E8C006515F9 /* LaunchScreen.storyboard in Resources */,
+				B8060CE523006E8C006515F9 /* Assets.xcassets in Resources */,
+				B8060CE023006E8B006515F9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B8060CD323006E8B006515F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8CF71342301424A005BB50E /* SimpleTextFieldFormViewController.swift in Sources */,
+				B8CF712A2300DCEB005BB50E /* LabelRightDetailCell.swift in Sources */,
+				B8CF713223013D93005BB50E /* ModalFormContainerViewController.swift in Sources */,
+				B8CF71172300C491005BB50E /* AppLabel.swift in Sources */,
+				B8060CE323006E8B006515F9 /* TipOut.xcdatamodeld in Sources */,
+				B8CF712E23013ABD005BB50E /* PresetsListViewController.swift in Sources */,
+				B8CF71252300D464005BB50E /* AppViewController.swift in Sources */,
+				B8CF71272300D645005BB50E /* UITableViewExtensions.swift in Sources */,
+				B8CF712C2300DDEC005BB50E /* CurrencyTextField.swift in Sources */,
+				B8CF711B2300C6D6005BB50E /* UIFontExtensions.swift in Sources */,
+				B8128B1C230287BD00C2920F /* AppFormViewController.swift in Sources */,
+				B8CF71152300C3DF005BB50E /* TipOutViewController.swift in Sources */,
+				B8CF711E2300C92D005BB50E /* AppTextField.swift in Sources */,
+				B8CF71222300CAD4005BB50E /* AppButton.swift in Sources */,
+				B8060CDB23006E8B006515F9 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B8060CDE23006E8B006515F9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B8060CDF23006E8B006515F9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B8060CE623006E8C006515F9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B8060CE723006E8C006515F9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B8060CEA23006E8C006515F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B8060CEB23006E8C006515F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B8060CED23006E8C006515F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 22K6B48Y8T;
+				INFOPLIST_FILE = TipOut/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = shayneptorres.TipOut;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B8060CEE23006E8C006515F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 22K6B48Y8T;
+				INFOPLIST_FILE = TipOut/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = shayneptorres.TipOut;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B8060CD223006E8B006515F9 /* Build configuration list for PBXProject "TipOut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8060CEA23006E8C006515F9 /* Debug */,
+				B8060CEB23006E8C006515F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B8060CEC23006E8C006515F9 /* Build configuration list for PBXNativeTarget "TipOut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8060CED23006E8C006515F9 /* Debug */,
+				B8060CEE23006E8C006515F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B8060CE123006E8B006515F9 /* TipOut.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B8060CE223006E8B006515F9 /* TipOut.xcdatamodel */,
+			);
+			currentVersion = B8060CE223006E8B006515F9 /* TipOut.xcdatamodel */;
+			path = TipOut.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = B8060CCF23006E8B006515F9 /* Project object */;
+}
