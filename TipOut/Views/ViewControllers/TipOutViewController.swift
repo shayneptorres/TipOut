@@ -103,23 +103,22 @@ class TipOutViewController: AppViewController {
     @objc private func onCurrencyTFDone() {
         
     }
-}
-
-extension TipOutViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    
+    // MARK: - UITableView Methods
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.deque(cell: LabelRightDetailCell.self, for: indexPath)
         
         cell.textLabel?.text = "Look a cell"
         cell.detailTextLabel?.text = "And its details"
-
+        
         return cell
     }
 }

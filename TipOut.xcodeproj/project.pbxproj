@@ -12,7 +12,13 @@
 		B8060CE323006E8B006515F9 /* TipOut.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8060CE123006E8B006515F9 /* TipOut.xcdatamodeld */; };
 		B8060CE523006E8C006515F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8060CE423006E8C006515F9 /* Assets.xcassets */; };
 		B8060CE823006E8C006515F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8060CE623006E8C006515F9 /* LaunchScreen.storyboard */; };
+		B80D9A142303D19700E14672 /* DataChangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A132303D19700E14672 /* DataChangeManager.swift */; };
+		B80D9A162304C0C300E14672 /* TipOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A152304C0C300E14672 /* TipOut.swift */; };
+		B80D9A182304C49A00E14672 /* PresetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A172304C49A00E14672 /* PresetDetailViewController.swift */; };
 		B8128B1C230287BD00C2920F /* AppFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8128B1B230287BD00C2920F /* AppFormViewController.swift */; };
+		B8128B1E23028AD900C2920F /* TipPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8128B1D23028AD900C2920F /* TipPreset.swift */; };
+		B8128B202302929800C2920F /* NSManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8128B1F2302929800C2920F /* NSManagedObjectContextExtensions.swift */; };
+		B8128B22230292FA00C2920F /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8128B21230292FA00C2920F /* Managed.swift */; };
 		B8CF71152300C3DF005BB50E /* TipOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71142300C3DF005BB50E /* TipOutViewController.swift */; };
 		B8CF71172300C491005BB50E /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71162300C491005BB50E /* AppLabel.swift */; };
 		B8CF711B2300C6D6005BB50E /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF711A2300C6D6005BB50E /* UIFontExtensions.swift */; };
@@ -35,7 +41,13 @@
 		B8060CE423006E8C006515F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8060CE723006E8C006515F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8060CE923006E8C006515F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B80D9A132303D19700E14672 /* DataChangeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChangeManager.swift; sourceTree = "<group>"; };
+		B80D9A152304C0C300E14672 /* TipOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipOut.swift; sourceTree = "<group>"; };
+		B80D9A172304C49A00E14672 /* PresetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetDetailViewController.swift; sourceTree = "<group>"; };
 		B8128B1B230287BD00C2920F /* AppFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFormViewController.swift; sourceTree = "<group>"; };
+		B8128B1D23028AD900C2920F /* TipPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipPreset.swift; sourceTree = "<group>"; };
+		B8128B1F2302929800C2920F /* NSManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
+		B8128B21230292FA00C2920F /* Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
 		B8CF71142300C3DF005BB50E /* TipOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipOutViewController.swift; sourceTree = "<group>"; };
 		B8CF71162300C491005BB50E /* AppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLabel.swift; sourceTree = "<group>"; };
 		B8CF711A2300C6D6005BB50E /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
@@ -104,6 +116,9 @@
 			isa = PBXGroup;
 			children = (
 				B8060CE123006E8B006515F9 /* TipOut.xcdatamodeld */,
+				B8128B1D23028AD900C2920F /* TipPreset.swift */,
+				B80D9A132303D19700E14672 /* DataChangeManager.swift */,
+				B80D9A152304C0C300E14672 /* TipOut.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -116,6 +131,7 @@
 				B8CF713123013D93005BB50E /* ModalFormContainerViewController.swift */,
 				B8CF71332301424A005BB50E /* SimpleTextFieldFormViewController.swift */,
 				B8128B1B230287BD00C2920F /* AppFormViewController.swift */,
+				B80D9A172304C49A00E14672 /* PresetDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -156,6 +172,7 @@
 			children = (
 				B8CF711A2300C6D6005BB50E /* UIFontExtensions.swift */,
 				B8CF71262300D645005BB50E /* UITableViewExtensions.swift */,
+				B8128B1F2302929800C2920F /* NSManagedObjectContextExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -163,6 +180,7 @@
 		B8CF71232300D441005BB50E /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				B8128B21230292FA00C2920F /* Managed.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -246,16 +264,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80D9A162304C0C300E14672 /* TipOut.swift in Sources */,
 				B8CF71342301424A005BB50E /* SimpleTextFieldFormViewController.swift in Sources */,
 				B8CF712A2300DCEB005BB50E /* LabelRightDetailCell.swift in Sources */,
 				B8CF713223013D93005BB50E /* ModalFormContainerViewController.swift in Sources */,
 				B8CF71172300C491005BB50E /* AppLabel.swift in Sources */,
 				B8060CE323006E8B006515F9 /* TipOut.xcdatamodeld in Sources */,
 				B8CF712E23013ABD005BB50E /* PresetsListViewController.swift in Sources */,
+				B8128B202302929800C2920F /* NSManagedObjectContextExtensions.swift in Sources */,
+				B80D9A182304C49A00E14672 /* PresetDetailViewController.swift in Sources */,
+				B8128B22230292FA00C2920F /* Managed.swift in Sources */,
 				B8CF71252300D464005BB50E /* AppViewController.swift in Sources */,
 				B8CF71272300D645005BB50E /* UITableViewExtensions.swift in Sources */,
 				B8CF712C2300DDEC005BB50E /* CurrencyTextField.swift in Sources */,
 				B8CF711B2300C6D6005BB50E /* UIFontExtensions.swift in Sources */,
+				B80D9A142303D19700E14672 /* DataChangeManager.swift in Sources */,
+				B8128B1E23028AD900C2920F /* TipPreset.swift in Sources */,
 				B8128B1C230287BD00C2920F /* AppFormViewController.swift in Sources */,
 				B8CF71152300C3DF005BB50E /* TipOutViewController.swift in Sources */,
 				B8CF711E2300C92D005BB50E /* AppTextField.swift in Sources */,
