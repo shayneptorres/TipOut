@@ -23,5 +23,6 @@ class AppLabel: UILabel {
     
     private func commonInit() {
         self.font = AppFont.normal(font: .medium)
+        self.textColor = System.theme.primaryBlack
     }
 }

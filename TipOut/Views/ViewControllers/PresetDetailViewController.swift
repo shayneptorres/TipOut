@@ -12,6 +12,9 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
     override var registeredTableViewCells: [UITableViewCell.Type] {
         return [LabelRightDetailCell.self]
     }
+    override var registeredTableHeaderFooterViews: [UITableViewHeaderFooterView.Type] {
+        return [LeftDetailRightDetailHeaderView.self]
+    }
     var preset: TipPreset?
     var tipOuts: [TipOut] {
         return Array(self.preset?.tipOuts ?? [])
@@ -37,31 +40,41 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
         self.removeObservers()
     }
     
+    // MARK: - Helpers
+    private func updateUI() {
+        // set the title to the name of the preset
+        self.title = self.preset?.name ?? "No Name"
+    }
+    
     // MARK: - Actions
     @objc func onAdd() {
-        self.showSimpleForm(labelText: nil, placeholder: "Enter Preset Name") { name in
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                let context = appDelegate.persistentContainer.viewContext // grab the app delegats persistent container
-                context.performChanges {
-                    guard let parentPreset = self.preset else { return }
-                    
-                    let newTipOut = TipOut.insert(into: context, name: name, tipPercentage: 0.0, preset: parentPreset)
-                    self.preset?.tipOuts.insert(newTipOut)
-                    // this performChanges block automatically calls .saveOrRollback() so we dont hve to manually do it
-                }
+        self.showTextNumberForm(title: "Add Person", textPlaceholder: "Enter name", numberPlaceholder: "Enter tip percentage (less than 100)") { modal, name, tipPercent in
+            DataManager.performChanges { context in
+                guard let parentPreset = self.preset else { return }
+                
+                let newTipOut = TipOut.insert(into: context, name: name, tipPercentage: tipPercent, preset: parentPreset)
+                self.preset?.tipOuts.insert(newTipOut)
+                modal.dismiss(animated: true)
             }
         }
     }
     
     @objc func onEdit() {
-        
+        self.showSimpleForm(title: "Edit Preset Name", textValue: self.preset?.name ?? "", placeholder: "Preset name") { modal, name in
+            DataManager.performChanges { context in
+                self.preset?.name = name
+                modal.dismiss(animated: true)
+            }
+        }
     }
     
     func onDidSave(_ notification: Notification) {
+        self.updateUI()
         self.tableView?.reloadData()
     }
     
     func onDidUpdate(_ notification: Notification) {
+        self.updateUI()
         self.tableView?.reloadData()
     }
     
@@ -79,13 +92,42 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
         let cell = tableView.deque(cell: LabelRightDetailCell.self, for: indexPath)
         let tipOut = self.tipOuts[indexPath.row]
         cell.textLabel?.text = tipOut.name
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .percent
-        let formattedPercent = numberFormatter.string(from: NSNumber(value: tipOut.tipPercentage))
-        cell.detailTextLabel?.text = String(describing: formattedPercent ?? "--")
+        let formattedPercent = String(format: "%.2f", tipOut.tipPercentage)
+        cell.detailTextLabel?.text = "\(formattedPercent)%"
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let tipOut = self.tipOuts[indexPath.row] // grab the selected tipout
+        self.showTextNumberForm(title: "Update \(tipOut.name)", textValue: tipOut.name, textPlaceholder: "Enter name", numberValue: tipOut.tipPercentage, numberPlaceholder: "Enter tip percentage (less than 100)") { modal, name, tipPercent in
+            DataManager.performChanges { context in
+                tipOut.name = name
+                tipOut.tipPercentage = tipPercent
+                modal.dismiss(animated: true)
+            }
+        }
+    }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return UITableViewCell.EditingStyle.delete // allow the swipe deletion of preset cells
+    }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            let tipOut = self.tipOuts[indexPath.row]
+            DataManager.performChanges { context in
+                tipOut.managedObjectContext?.delete(tipOut) // delete the object from the managed context
+            }
+        default:
+            break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let leftRightDetailHeader = tableView.deque(headerFooterView: LeftDetailRightDetailHeaderView.self)
+        leftRightDetailHeader.leftDetailText = "Person Name"
+        leftRightDetailHeader.rightDetailText = "Tip Percent (%)"
+        return leftRightDetailHeader
+    }
 }

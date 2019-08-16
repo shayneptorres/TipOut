@@ -13,4 +13,9 @@ extension UITableView {
         // Allow the force unwrap, if the cell is not registered, crash the app?
         return self.dequeueReusableCell(withIdentifier: String(describing: cell), for: indexPath) as! T
     }
+    
+    func deque<T>(headerFooterView: T.Type) -> T {
+        // Allow the force unwrap, if the headerfooter view is not registered, crash the app?
+        return self.dequeueReusableHeaderFooterView(withIdentifier: String(describing: headerFooterView)) as! T
+    }
 }

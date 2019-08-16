@@ -24,7 +24,8 @@ class AppTextField: UITextField {
     
     func commonInit() {
         self.font = AppFont.normal(font: .medium)
-        self.backgroundColor = .lightGray
+        self.backgroundColor = System.theme.secondaryGray
+        self.textColor = System.theme.primaryBlack
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {

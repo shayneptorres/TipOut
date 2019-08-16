@@ -9,10 +9,10 @@
     <entity name="TipPreset" representedClassName=".TipPreset" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tipOuts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TipOut" inverseName="parentPreset" inverseEntity="TipOut" syncable="YES"/>
+        <relationship name="tipOuts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TipOut" inverseName="parentPreset" inverseEntity="TipOut" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TipPreset" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="TipOut" positionX="-63" positionY="0" width="128" height="105"/>
+        <element name="TipPreset" positionX="-63" positionY="-18" width="128" height="30"/>
     </elements>
 </model>

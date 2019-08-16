@@ -61,6 +61,9 @@ class ModalFormContainerViewController: AppViewController {
         self.view.addSubview(self.containerView)
         self.containerView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.backgroundColor = .white
+        // set corner radius
+        self.containerView.layer.cornerRadius = 8
+        self.containerView.layer.masksToBounds = true
         
         // setup view controller container view
         self.containerView.addSubview(self.viewControllerContainerView)
@@ -75,7 +78,7 @@ class ModalFormContainerViewController: AppViewController {
         cancelButton.addTarget(self, action: #selector(self.onCancel), for: .primaryActionTriggered)
         let affirmButton = AppButton()
         affirmButton.setTitle("Affirm", for: .normal)
-        affirmButton.appButtonType = .simpleButton(textColor: .white, bgColor: .green)
+        affirmButton.appButtonType = .simpleButton(textColor: .white, bgColor: System.theme.seconaryGreen)
         affirmButton.addTarget(self, action: #selector(self.onAffirm), for: .primaryActionTriggered)
         self.buttonStack.addArrangedSubview(cancelButton)
         self.buttonStack.addArrangedSubview(affirmButton)

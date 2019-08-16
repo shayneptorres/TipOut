@@ -9,8 +9,19 @@
 import UIKit
 
 class SimpleTextFieldFormViewController: AppFormViewController {
+    private let titleLabel = AppLabel()
     private let textFieldLabel = AppLabel()
     private let textField = AppTextField()
+    var textValue: String? {
+        didSet {
+            self.textField.text = self.textValue
+        }
+    }
+    var formTitle: String? {
+        didSet {
+            self.titleLabel.text = self.formTitle
+        }
+    }
     var label: String? = "" {
         didSet {
             self.textFieldLabel.text = self.label
@@ -37,6 +48,12 @@ class SimpleTextFieldFormViewController: AppFormViewController {
     
     // MARK: - Helpers
     func setupViews() {
+        // setup form title label
+        self.view.addSubview(self.titleLabel)
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.textAlignment = .center
+        self.titleLabel.font = AppFont.normal(font: .large)
+        
         // setup label
         self.view.addSubview(self.textFieldLabel)
         self.textFieldLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -50,8 +67,12 @@ class SimpleTextFieldFormViewController: AppFormViewController {
         
         // setup constraints
         NSLayoutConstraint.activate([
+            // Title label contraints
+            self.titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            self.titleLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 8),
+            self.titleLabel.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -8),
             // textfield label
-            self.textFieldLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            self.textFieldLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 8),
             self.textFieldLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 8),
             self.textFieldLabel.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -8),
             // textfield

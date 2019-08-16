@@ -34,7 +34,7 @@ class AppButton: UIButton {
     }
     
     private func commonInit() {
-        self.titleLabel?.font = AppFont.bold(font: .medium)
+        self.titleLabel?.font = AppFont.normal(font: .medium)
         
     }
     

@@ -11,10 +11,21 @@ import CoreData
 
 class PresetsListViewController: AppViewController, DataChangeDelegate {
     
+    enum Mode {
+        case showDetail
+        case setActive
+    }
+    
     override var registeredTableViewCells: [UITableViewCell.Type] {
         return [LabelRightDetailCell.self]
     }
     private var presets: [TipPreset] = []
+    var mode: Mode = .showDetail {
+        didSet {
+            
+        }
+    }
+    private var buttonStack = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +44,18 @@ class PresetsListViewController: AppViewController, DataChangeDelegate {
     private func setupViews() {
         
         // Update title
-        self.title = "Presets"
+        self.title = self.mode == .showDetail ? "Presets" : "Select Active Preset"
+        self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.barTintColor = System.theme.primaryBlue
+        self.navigationController?.navigationBar.tintColor = System.theme.primaryWhite
+        let textAttributes = [NSAttributedString.Key.foregroundColor: System.theme.primaryWhite]
+        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
         
         // Setup nav bar buttons
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onAdd))
+        if self.mode == .showDetail {
+            // only allow the user to add preset if we are in showDetail mode
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onAdd))
+        }
         
         // Setup table view
         self.tableView = UITableView()
@@ -49,13 +68,38 @@ class PresetsListViewController: AppViewController, DataChangeDelegate {
         self.view.addSubview(table)
         table.translatesAutoresizingMaskIntoConstraints = false
         
-        // setup tableview constraints
-        NSLayoutConstraint.activate([
-            table.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            table.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
-            table.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
-            table.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-        ])
+        switch self.mode {
+        case .showDetail:
+            // setup tableview constraints
+            NSLayoutConstraint.activate([
+                table.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                table.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
+                table.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
+                table.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                ])
+        case .setActive:
+//            self.view.addSubview(self.buttonStack)
+//            self.buttonStack.translatesAutoresizingMaskIntoConstraints = false
+            let cancelBtn = AppButton()
+            cancelBtn.appButtonType = .simpleButton(textColor: .white, bgColor: .lightGray)
+            self.view.addSubview(cancelBtn)
+            cancelBtn.translatesAutoresizingMaskIntoConstraints = false
+            cancelBtn.setTitle("Cancel", for: .normal)
+            cancelBtn.addTarget(self, action: #selector(self.onCancel), for: .primaryActionTriggered)
+            NSLayoutConstraint.activate([
+                // set table constraints
+                table.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                table.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
+                table.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
+                // set cancel button constraints
+                cancelBtn.topAnchor.constraint(equalTo: table.bottomAnchor),
+                cancelBtn.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
+                cancelBtn.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
+                cancelBtn.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                cancelBtn.heightAnchor.constraint(equalToConstant: 45)
+            ])
+        }
+        
     }
     
     private func loadData() {
@@ -67,38 +111,19 @@ class PresetsListViewController: AppViewController, DataChangeDelegate {
         self.tableView?.reloadData()
     }
     
+    func updateForMode() {
+        self.loadData()
+    }
+    
     // MARK: - Actions
     
     @objc private func onAdd() {
-        self.showSimpleForm(labelText: nil, placeholder: "Enter Preset Name") { name in
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                let context = appDelegate.persistentContainer.viewContext // grab the app delegats persistent container
-                context.performChanges {
-                    TipPreset.insert(into: context, name: name) // perform the insert changes on the persistent container
-                    // this performChanges block automatically calls .saveOrRollback() so we dont hve to manually do it
-                }
+        self.showSimpleForm(title: "Add Preset List", placeholder: "Enter Preset Name") { modal, name in
+            DataManager.performChanges { context in
+                TipPreset.insert(into: context, name: name) // perform the insert changes on the persistent container
+                modal.dismiss(animated: true)
             }
         }
-//
-//        let modalVC = ModalFormContainerViewController() // initialize the modal controller
-//        let simpleTextFieldViewController = SimpleTextFieldFormViewController() // initialize the simple form controller
-//        simpleTextFieldViewController.label = nil
-//        simpleTextFieldViewController.placeholder = "Enter Preset Name"
-//        // set the completion for when a user affirms the changes in the simple text field form vc
-//        simpleTextFieldViewController.submitCompletion = { name in
-//            modalVC.dismiss(animated: true) // dismiss the modal
-//            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-//                let context = appDelegate.persistentContainer.viewContext // grab the app delegats persistent container
-//                context.performChanges {
-//                    TipPreset.insert(into: context, name: name ?? "No Name") // perform the insert changes on the persistent container
-//                    // this performChanges block automatically calls .saveOrRollback() so we dont hve to manually do it
-//                }
-//            }
-//        }
-//        modalVC.setContainer(viewController: simpleTextFieldViewController) // set the form controller on the modal vc
-//        modalVC.modalPresentationStyle = .overCurrentContext // we want the main view visible under the modal
-//        modalVC.modalTransitionStyle = .crossDissolve // we want a cross disolve appearing animation
-//        self.navigationController?.tabBarController?.present(modalVC, animated: true)
     }
     
     func onDidSave(_ notification: Notification) {
@@ -107,6 +132,10 @@ class PresetsListViewController: AppViewController, DataChangeDelegate {
     
     func onDidUpdate(_ notification: Notification) {
         self.loadData() // reload data to reflect current state
+    }
+    
+    @objc func onCancel() {
+        self.dismiss(animated: true)
     }
     
     // MARK: UITableView Methods
@@ -128,26 +157,30 @@ class PresetsListViewController: AppViewController, DataChangeDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let presetDetailVC = PresetDetailViewController()
-        presetDetailVC.preset = self.presets[indexPath.row]
-        presetDetailVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(presetDetailVC, animated: true)
+        let preset = self.presets[indexPath.row]
+        switch self.mode {
+        case .showDetail:
+            let presetDetailVC = PresetDetailViewController()
+            presetDetailVC.preset = preset
+            presetDetailVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(presetDetailVC, animated: true)
+        case .setActive:
+            UserDefaultsManager.set(.activePresetID, value: String(describing: preset.id))
+            self.dismiss(animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return UITableViewCell.EditingStyle.delete // allow the swipe deletion of preset cells
+        // only allow the deletion of cells when mode is show detail
+        return self.mode == .showDetail ? .delete : .none
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
             let preset = self.presets[indexPath.row]
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                let context = appDelegate.persistentContainer.viewContext // grab the app delegats persistent container
-                context.performChanges {
-                    preset.managedObjectContext?.delete(preset) // delete the object from the managed context
-                    // this performChanges block automatically calls .saveOrRollback() so we dont hve to manually do it
-                }
+            DataManager.performChanges { context in
+                preset.managedObjectContext?.delete(preset) // delete the object from the managed context
             }
         default:
             break

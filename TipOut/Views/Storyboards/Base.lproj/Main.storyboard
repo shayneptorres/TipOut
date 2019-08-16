@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,7 +19,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Tip Out" id="Z1C-eU-JHc"/>
+                    <tabBarItem key="tabBarItem" title="Tip Out" image="dollar" id="Z1C-eU-JHc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -48,6 +47,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="YUo-O8-ObO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="i4U-tm-YHT">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -64,7 +64,7 @@
         <scene sceneID="7R0-3t-u7l">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ej2-8t-9kU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Presets" id="wZt-vU-OQk"/>
+                    <tabBarItem key="tabBarItem" title="Presets" image="list" id="wZt-vU-OQk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Hat-1z-mUT">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -80,4 +80,8 @@
             <point key="canvasLocation" x="489.85507246376818" y="855.80357142857144"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dollar" width="34" height="25"/>
+        <image name="list" width="34" height="25"/>
+    </resources>
 </document>

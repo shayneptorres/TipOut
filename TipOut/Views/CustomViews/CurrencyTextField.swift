@@ -9,13 +9,27 @@
 import UIKit
 import Foundation
 
+protocol CurrencyTextFieldDelegate: class {
+    func currencyTextFieldDidUpdate(value: Double)
+}
+
 class CurrencyTextField: AppTextField, UITextFieldDelegate {
+    
+    weak var currencyDelegate: CurrencyTextFieldDelegate?
+    var doubleValue: Double {
+        let currentStrValue = self.text?.replacingOccurrences(of: "$", with: "").replacingOccurrences(of: ",", with: "") ?? ""
+        return Double(currentStrValue) ?? 0
+    }
     
     override func commonInit() {
         super.commonInit()
         
         self.textAlignment = .right
-        self.textColor = .green
+        self.textColor = System.theme.seconaryGreen
+        self.backgroundColor = System.theme.secondaryGray
+        self.attributedPlaceholder = NSAttributedString(
+            string: "ENTER TOTAL",
+            attributes: [NSAttributedString.Key.foregroundColor: System.theme.primaryBlack])
         self.keyboardType = .numberPad
         self.delegate = self
         self.font = AppFont.normal(font: .xLarge)
@@ -48,7 +62,7 @@ class CurrencyTextField: AppTextField, UITextFieldDelegate {
         formatter.numberStyle = .currency // set the format to currency
         let num = NSNumber(value: currDouble/100) // divide by 100, so we dont deal user inputed decimals
         self.text = formatter.string(from: num)
-        
+        self.currencyDelegate?.currencyTextFieldDidUpdate(value: self.doubleValue)
         return false
     }
     
