@@ -12,6 +12,7 @@ class UserDefaultsManager {
     
     enum UserDefault: String {
         case activePresetID = "activePresetID"
+        case shouldSetDefaultPresets = "shouldSetDefaultPresets"
     }
     
     static func set(_ userDefault: UserDefault, value: Any?) {

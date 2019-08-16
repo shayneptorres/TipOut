@@ -39,6 +39,40 @@ class TipOutViewController: AppViewController {
         super.viewDidLoad()
 
         self.setupViews() // setup views
+        
+        guard UserDefaultsManager.get(.shouldSetDefaultPresets) == nil else { return }
+        
+        // check if the default presets have been added
+        DataManager.performChanges { context in
+            // setup default servers preset
+            let defaultServersPreset = TipPreset.insert(into: context, name: "Servers")
+            let defaultServersTipOuts = [
+                TipOut.insert(into: context, name: "HOH", tipPercentage: 2, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "Bar", tipPercentage: 1.5, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "Busser", tipPercentage: 2, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "Food Runner", tipPercentage: 1.5, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "Host", tipPercentage: 1, preset: defaultServersPreset)
+            ]
+            for tipout in defaultServersTipOuts {
+                defaultServersPreset.tipOuts.insert(tipout)
+            }
+            
+            let defaultBarPreset = TipPreset.insert(into: context, name: "Bar")
+            let defaultBarTipOuts = [
+                TipOut.insert(into: context, name: "HOH", tipPercentage: 2, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "Barback", tipPercentage: 3, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "Busser", tipPercentage: 2, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "Food Runner", tipPercentage: 1.5, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "Host", tipPercentage: 1, preset: defaultServersPreset)
+            ]
+            for tipout in defaultBarTipOuts {
+                defaultBarPreset.tipOuts.insert(tipout)
+            }
+            
+            UserDefaultsManager.set(.shouldSetDefaultPresets, value: false)
+            UserDefaultsManager.set(.activePresetID, value: String(describing: defaultServersPreset.id))
+            self.preset = defaultServersPreset
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +99,7 @@ class TipOutViewController: AppViewController {
         // Setup header label
         self.view.addSubview(self.headerLabel)
         self.headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.headerLabel.text = "Tip Out"
+        self.headerLabel.text = "Tip Outs"
         self.headerLabel.font = AppFont.normal(font: .header)
         self.headerLabel.textColor = System.theme.primaryWhite
         

@@ -41,6 +41,12 @@ class SimpleTextFieldFormViewController: AppFormViewController {
         self.setupViews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.textField.becomeFirstResponder()
+    }
+    
     // MARK: - Actions
     override func onAffirm() {
         self.submitCompletion?(self.textField.text)
@@ -64,6 +70,7 @@ class SimpleTextFieldFormViewController: AppFormViewController {
         self.view.addSubview(self.textField)
         self.textField.translatesAutoresizingMaskIntoConstraints = false
         self.textField.placeholder = self.placeholder
+        self.textField.clearButtonMode = .always
         
         // setup constraints
         NSLayoutConstraint.activate([

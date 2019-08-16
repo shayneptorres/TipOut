@@ -45,6 +45,12 @@ class TextNumberFormViewController: AppFormViewController, UITextFieldDelegate {
         self.setupViews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.textField.becomeFirstResponder()
+    }
+    
     func setupViews() {
         // setup form title label
         self.view.addSubview(self.titleLabel)
@@ -55,12 +61,14 @@ class TextNumberFormViewController: AppFormViewController, UITextFieldDelegate {
         // setup textField
         self.view.addSubview(self.textField)
         self.textField.translatesAutoresizingMaskIntoConstraints = false
+        self.textField.clearButtonMode = .always
         
         // setup numberTextField
         self.view.addSubview(self.numberTextField)
         self.numberTextField.translatesAutoresizingMaskIntoConstraints = false
         self.numberTextField.keyboardType = .decimalPad
         self.numberTextField.delegate = self
+        self.numberTextField.clearButtonMode = .always
         
         NSLayoutConstraint.activate([
             // Title label contraints
