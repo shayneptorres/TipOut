@@ -16,6 +16,7 @@ final class TipOut: NSManagedObject, Managed {
     @NSManaged var name: String
     @NSManaged var parentPreset: TipPreset
     @NSManaged var tipPercentage: Double
+    @NSManaged var createdAt: Date
     
     @discardableResult static func insert(into context: NSManagedObjectContext, name: String, tipPercentage: Double, preset: TipPreset) -> TipOut {
         let tipOut: TipOut = context.insertObject()
@@ -23,6 +24,7 @@ final class TipOut: NSManagedObject, Managed {
         tipOut.name = name
         tipOut.tipPercentage = tipPercentage
         tipOut.parentPreset = preset
+        tipOut.createdAt = Date()
         return tipOut
     }
 }

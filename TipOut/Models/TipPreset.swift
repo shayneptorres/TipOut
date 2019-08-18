@@ -15,12 +15,14 @@ final class TipPreset: NSManagedObject, Managed {
     @NSManaged var id: UUID
     @NSManaged var name: String
     @NSManaged var tipOuts: Set<TipOut>
+    @NSManaged var createdAt: Date
     
     @discardableResult static func insert(into context: NSManagedObjectContext, name: String) -> TipPreset {
         let tipPreset: TipPreset = context.insertObject()
         tipPreset.id = UUID()
         tipPreset.name = name
         tipPreset.tipOuts = []
+        tipPreset.createdAt = Date()
         return tipPreset
     }
 }
