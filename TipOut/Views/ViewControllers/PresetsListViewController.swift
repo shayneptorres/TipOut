@@ -105,7 +105,7 @@ class PresetsListViewController: AppViewController, DataChangeDelegate {
     private func loadData() {
         // grab the saved presets from the app persistent container
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            self.presets = TipPreset.getAll(in: appDelegate.persistentContainer.viewContext)
+            self.presets = TipPreset.getAll(in: appDelegate.persistentContainer.viewContext).sorted(by: { $0.createdAt < $1.createdAt })
         }
         
         self.tableView?.reloadData()

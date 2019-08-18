@@ -17,7 +17,7 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
     }
     var preset: TipPreset?
     var tipOuts: [TipOut] {
-        return Array(self.preset?.tipOuts ?? [])
+        return Array(self.preset?.tipOuts.sorted(by: { $0.createdAt < $1.createdAt }) ?? [])
     }
     
     override func viewDidLoad() {
