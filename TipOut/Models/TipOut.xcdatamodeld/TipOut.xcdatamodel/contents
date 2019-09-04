@@ -4,6 +4,7 @@
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="saleTipType" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="tipPercentage" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="parentPreset" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TipPreset" inverseName="tipOuts" inverseEntity="TipPreset" syncable="YES"/>
     </entity>
@@ -14,7 +15,7 @@
         <relationship name="tipOuts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TipOut" inverseName="parentPreset" inverseEntity="TipOut" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TipOut" positionX="-63" positionY="0" width="128" height="120"/>
+        <element name="TipOut" positionX="-63" positionY="0" width="128" height="135"/>
         <element name="TipPreset" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

@@ -24,7 +24,7 @@ class DataManager {
             // setup default servers preset
             let defaultServersPreset = TipPreset.insert(into: context, name: "Servers")
             let defaultServersTipOuts = [
-                TipOut.insert(into: context, name: "HOH", tipPercentage: 2, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "HOH", tipType: 1, tipPercentage: 2, preset: defaultServersPreset),
                 TipOut.insert(into: context, name: "Bar", tipPercentage: 1.5, preset: defaultServersPreset),
                 TipOut.insert(into: context, name: "Busser", tipPercentage: 2, preset: defaultServersPreset),
                 TipOut.insert(into: context, name: "Food Runner", tipPercentage: 1.5, preset: defaultServersPreset),
@@ -36,10 +36,10 @@ class DataManager {
             
             let defaultBarPreset = TipPreset.insert(into: context, name: "Bar")
             let defaultBarTipOuts = [
-                TipOut.insert(into: context, name: "HOH", tipPercentage: 2, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "HOH", tipType: 1, tipPercentage: 2, preset: defaultServersPreset),
                 TipOut.insert(into: context, name: "Barback", tipPercentage: 3, preset: defaultServersPreset),
                 TipOut.insert(into: context, name: "Busser", tipPercentage: 2, preset: defaultServersPreset),
-                TipOut.insert(into: context, name: "Food Runner", tipPercentage: 1.5, preset: defaultServersPreset),
+                TipOut.insert(into: context, name: "Food Runner", tipType: 1, tipPercentage: 1.5, preset: defaultServersPreset),
                 TipOut.insert(into: context, name: "Host", tipPercentage: 1, preset: defaultServersPreset)
             ]
             for tipout in defaultBarTipOuts {

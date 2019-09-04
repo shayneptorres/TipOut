@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 protocol CurrencyTextFieldDelegate: class {
-    func currencyTextFieldDidUpdate(value: Double)
+    func currency(textField: CurrencyTextField, didUpdate value: Double)
 }
 
 class CurrencyTextField: AppTextField, UITextFieldDelegate {
@@ -62,7 +62,7 @@ class CurrencyTextField: AppTextField, UITextFieldDelegate {
         formatter.numberStyle = .currency // set the format to currency
         let num = NSNumber(value: currDouble/100) // divide by 100, so we dont deal user inputed decimals
         self.text = formatter.string(from: num)
-        self.currencyDelegate?.currencyTextFieldDidUpdate(value: self.doubleValue)
+        self.currencyDelegate?.currency(textField: self, didUpdate: self.doubleValue)
         return false
     }
     
