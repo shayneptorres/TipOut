@@ -15,7 +15,7 @@
 		B80D9A142303D19700E14672 /* DataChangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A132303D19700E14672 /* DataChangeManager.swift */; };
 		B80D9A162304C0C300E14672 /* TipOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A152304C0C300E14672 /* TipOut.swift */; };
 		B80D9A182304C49A00E14672 /* PresetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A172304C49A00E14672 /* PresetDetailViewController.swift */; };
-		B80D9A1A2306006E00E14672 /* TextNumberFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A192306006E00E14672 /* TextNumberFormViewController.swift */; };
+		B80D9A1A2306006E00E14672 /* TextNumberSegmentFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A192306006E00E14672 /* TextNumberSegmentFormViewController.swift */; };
 		B80D9A1C2306228B00E14672 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A1B2306228B00E14672 /* DataManager.swift */; };
 		B80D9A1E2306729400E14672 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A1D2306729400E14672 /* UIViewExtensions.swift */; };
 		B80D9A2023070B2B00E14672 /* LeftDetailRightDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D9A1F23070B2B00E14672 /* LeftDetailRightDetailHeaderView.swift */; };
@@ -26,6 +26,8 @@
 		B8128B1E23028AD900C2920F /* TipPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8128B1D23028AD900C2920F /* TipPreset.swift */; };
 		B8128B202302929800C2920F /* NSManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8128B1F2302929800C2920F /* NSManagedObjectContextExtensions.swift */; };
 		B8128B22230292FA00C2920F /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8128B21230292FA00C2920F /* Managed.swift */; };
+		B8913DD02320D83300F2D3C6 /* TipOutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8913DCF2320D83300F2D3C6 /* TipOutTableViewController.swift */; };
+		B8913DD22320D9FF00F2D3C6 /* AppTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8913DD12320D9FF00F2D3C6 /* AppTableViewController.swift */; };
 		B8CF71152300C3DF005BB50E /* TipOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71142300C3DF005BB50E /* TipOutViewController.swift */; };
 		B8CF71172300C491005BB50E /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF71162300C491005BB50E /* AppLabel.swift */; };
 		B8CF711B2300C6D6005BB50E /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF711A2300C6D6005BB50E /* UIFontExtensions.swift */; };
@@ -51,7 +53,7 @@
 		B80D9A132303D19700E14672 /* DataChangeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChangeManager.swift; sourceTree = "<group>"; };
 		B80D9A152304C0C300E14672 /* TipOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipOut.swift; sourceTree = "<group>"; };
 		B80D9A172304C49A00E14672 /* PresetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetDetailViewController.swift; sourceTree = "<group>"; };
-		B80D9A192306006E00E14672 /* TextNumberFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNumberFormViewController.swift; sourceTree = "<group>"; };
+		B80D9A192306006E00E14672 /* TextNumberSegmentFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNumberSegmentFormViewController.swift; sourceTree = "<group>"; };
 		B80D9A1B2306228B00E14672 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		B80D9A1D2306729400E14672 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		B80D9A1F23070B2B00E14672 /* LeftDetailRightDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftDetailRightDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,8 @@
 		B8128B1D23028AD900C2920F /* TipPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipPreset.swift; sourceTree = "<group>"; };
 		B8128B1F2302929800C2920F /* NSManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
 		B8128B21230292FA00C2920F /* Managed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
+		B8913DCF2320D83300F2D3C6 /* TipOutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipOutTableViewController.swift; sourceTree = "<group>"; };
+		B8913DD12320D9FF00F2D3C6 /* AppTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTableViewController.swift; sourceTree = "<group>"; };
 		B8CF71142300C3DF005BB50E /* TipOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipOutViewController.swift; sourceTree = "<group>"; };
 		B8CF71162300C491005BB50E /* AppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLabel.swift; sourceTree = "<group>"; };
 		B8CF711A2300C6D6005BB50E /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
@@ -146,7 +150,9 @@
 				B8CF71332301424A005BB50E /* SimpleTextFieldFormViewController.swift */,
 				B8128B1B230287BD00C2920F /* AppFormViewController.swift */,
 				B80D9A172304C49A00E14672 /* PresetDetailViewController.swift */,
-				B80D9A192306006E00E14672 /* TextNumberFormViewController.swift */,
+				B80D9A192306006E00E14672 /* TextNumberSegmentFormViewController.swift */,
+				B8913DCF2320D83300F2D3C6 /* TipOutTableViewController.swift */,
+				B8913DD12320D9FF00F2D3C6 /* AppTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -304,12 +310,14 @@
 				B8CF712C2300DDEC005BB50E /* CurrencyTextField.swift in Sources */,
 				B80D9A22230712D500E14672 /* UserDefaultsManager.swift in Sources */,
 				B8CF711B2300C6D6005BB50E /* UIFontExtensions.swift in Sources */,
-				B80D9A1A2306006E00E14672 /* TextNumberFormViewController.swift in Sources */,
+				B8913DD02320D83300F2D3C6 /* TipOutTableViewController.swift in Sources */,
+				B80D9A1A2306006E00E14672 /* TextNumberSegmentFormViewController.swift in Sources */,
 				B80D9A142303D19700E14672 /* DataChangeManager.swift in Sources */,
 				B8128B1E23028AD900C2920F /* TipPreset.swift in Sources */,
 				B8128B1C230287BD00C2920F /* AppFormViewController.swift in Sources */,
 				B8CF71152300C3DF005BB50E /* TipOutViewController.swift in Sources */,
 				B8CF711E2300C92D005BB50E /* AppTextField.swift in Sources */,
+				B8913DD22320D9FF00F2D3C6 /* AppTableViewController.swift in Sources */,
 				B8CF71222300CAD4005BB50E /* AppButton.swift in Sources */,
 				B80D9A2423072B4C00E14672 /* System.swift in Sources */,
 				B8060CDB23006E8B006515F9 /* AppDelegate.swift in Sources */,

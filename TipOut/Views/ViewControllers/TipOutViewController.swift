@@ -15,6 +15,8 @@ class TipOutViewController: AppViewController {
         case foodSales
         case header // make sure header is last, dont let it get confused with the enum values
     }
+    private let tipoutTableViewController = TipOutTableViewController()
+    private let tipoutTableViewContainer = UIView()
     private let sections: [SectionType] = [.totalSales, .foodSales]
     private let headerLabel = AppLabel()
     private let presetNameLabel = AppLabel()
@@ -29,25 +31,18 @@ class TipOutViewController: AppViewController {
     }
     private var preset: TipPreset? {
         didSet {
+            self.tipoutTableViewController.preset = self.preset
             self.updateViews()
-            self.tableView?.reloadData()
         }
     }
     private var tipOuts: [TipOut] {
         return Array(self.preset?.tipOuts ?? [])
     }
     private var totalTipouts: [TipOut] {
-        return self.tipOuts.filter { TipOut.SaleTipType(rawValue: $0.saleTipType) == .total }
+        return self.tipOuts.filter { TipOut.SaleType(rawValue: $0.saleTipTypeValue) == .total }
     }
     private var foodTipouts: [TipOut] {
-        return self.tipOuts.filter { TipOut.SaleTipType(rawValue: $0.saleTipType) == .food }
-    }
-    override var registeredTableViewCells: [UITableViewCell.Type] {
-        return [LabelRightDetailCell.self]
-    }
-    
-    override var registeredTableHeaderFooterViews: [UITableViewHeaderFooterView.Type] {
-        return [LeftDetailRightDetailHeaderView.self]
+        return self.tipOuts.filter { TipOut.SaleType(rawValue: $0.saleTipTypeValue) == .food }
     }
 
     override func viewDidLoad() {
@@ -123,15 +118,16 @@ class TipOutViewController: AppViewController {
         self.foodSalesTextField.currencyDelegate = self
         self.foodSalesTextField.placeholder = "Enter Food Sales"
         self.view.addSubview(self.foodSalesTextField)
-                
-        // Setup tableView
-        self.tableView = UITableView(frame: .zero, style: .plain)
-        guard let table = self.tableView else { return }
         
-        self.view.addSubview(table)
-        table.delegate = self
-        table.dataSource = self
-        table.translatesAutoresizingMaskIntoConstraints = false
+        // Setup table view container
+        self.view.addSubview(self.tipoutTableViewContainer)
+        self.tipoutTableViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Setup TipOutTableViewController
+        self.tipoutTableViewContainer.addSubview(self.tipoutTableViewController.view)
+        self.addChild(self.tipoutTableViewController)
+        self.tipoutTableViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
         
         // Set contstrains
         NSLayoutConstraint.activate([
@@ -154,11 +150,16 @@ class TipOutViewController: AppViewController {
             self.foodSalesTextField.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 0),
             self.foodSalesTextField.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: 0),
             self.foodSalesTextField.heightAnchor.constraint(equalToConstant: 45),
-            // Table view
-            table.topAnchor.constraint(equalTo: self.foodSalesTextField.bottomAnchor, constant: 0),
-            table.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 0),
-            table.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: 0),
-            table.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            // TableViewContainer
+            self.tipoutTableViewContainer.topAnchor.constraint(equalTo: self.foodSalesTextField.bottomAnchor, constant: 0),
+            self.tipoutTableViewContainer.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 0),
+            self.tipoutTableViewContainer.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: 0),
+            self.tipoutTableViewContainer.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            // TableViewController
+            self.tipoutTableViewController.view.topAnchor.constraint(equalTo: self.tipoutTableViewContainer.topAnchor),
+            self.tipoutTableViewController.view.leftAnchor.constraint(equalTo: self.tipoutTableViewContainer.leftAnchor),
+            self.tipoutTableViewController.view.rightAnchor.constraint(equalTo: self.tipoutTableViewContainer.rightAnchor),
+            self.tipoutTableViewController.view.bottomAnchor.constraint(equalTo: self.tipoutTableViewContainer.bottomAnchor),
         ])
     }
     
@@ -186,76 +187,15 @@ class TipOutViewController: AppViewController {
         let nav = UINavigationController(rootViewController: presetList)
         self.tabBarController?.present(nav, animated: true)
     }
-    
-    // MARK: - UITableView Methods
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.sections.count
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionType = SectionType(rawValue: section) else { return 0 }
-        
-        switch sectionType {
-        case .totalSales:
-            return self.totalTipouts.count
-        case .foodSales:
-            return self.foodTipouts.count
-        case .header:
-            return 0
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let sectionType = SectionType(rawValue: indexPath.section) else { return UITableViewCell() }
-        
-        let cell = tableView.deque(cell: LabelRightDetailCell.self, for: indexPath)
-        var tipOut: TipOut
-        var tipDisplayValue: Double = 0
-        
-        switch sectionType {
-        case .totalSales:
-            tipOut = self.totalTipouts[indexPath.row]
-            let tipPercent = tipOut.tipPercentage
-            tipDisplayValue = self.totalSales * (tipPercent/100)
-        case .foodSales:
-            tipOut = self.foodTipouts[indexPath.row]
-            let tipPercent = tipOut.tipPercentage
-            tipDisplayValue = self.foodSales * (tipPercent/100)
-        case .header:
-            return cell
-        }
-        
-        
-        cell.textLabel?.text = tipOut.name
-        let formattedDollar = String(format: "%.2f", tipDisplayValue)
-        let formattedPercent = String(format: "%.2f", tipOut.tipPercentage)
-        cell.detailTextLabel?.text = "(\(formattedPercent)%)  $\(formattedDollar)"
-        cell.detailTextLabel?.textColor = .red
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let sectionType = SectionType(rawValue: section) else { return nil }
-        
-        let leftRightDetailHeader = tableView.deque(headerFooterView: LeftDetailRightDetailHeaderView.self)
-        
-        switch sectionType {
-        case .totalSales:
-            leftRightDetailHeader.leftDetailText = "Total Sales Tips"
-            leftRightDetailHeader.rightDetailText = nil
-        case .foodSales:
-            leftRightDetailHeader.leftDetailText = "Food Sales Tips"
-            leftRightDetailHeader.rightDetailText = nil
-        case .header:
-            leftRightDetailHeader.leftDetailText = "Person Name"
-            leftRightDetailHeader.rightDetailText = "Tip Amount ($)"
-        }
-        return leftRightDetailHeader
-    }
 }
 
 extension TipOutViewController: CurrencyTextFieldDelegate {
     func currency(textField: CurrencyTextField, didUpdate value: Double) {
-        self.tableView?.reloadData()
+        if textField == self.totalSalesTextField {
+            self.tipoutTableViewController.totalSales = self.totalSales
+        } else if textField == self.foodSalesTextField {
+            self.tipoutTableViewController.foodSales = self.foodSales
+        }
+        
     }
 }

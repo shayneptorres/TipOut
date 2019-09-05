@@ -45,17 +45,18 @@ class AppViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.navigationController?.tabBarController?.present(modalVC, animated: true)
     }
     
-    func showTextNumberForm(title: String? = nil, textValue: String? = nil, textPlaceholder: String? = nil, numberValue: Double? = nil, numberPlaceholder: String? = nil, submitCompletion: ((ModalFormContainerViewController, String, Double)->())? = nil) {
+    func showTextNumberForm(title: String? = nil, textValue: String? = nil, textPlaceholder: String? = nil, numberValue: Double? = nil, numberPlaceholder: String? = nil, saleType: TipOut.SaleType = .total, submitCompletion: ((ModalFormContainerViewController, String, Double, TipOut.SaleType)->())? = nil) {
         let modalVC = ModalFormContainerViewController() // initialize the modal controller
-        let textNumberViewController = TextNumberFormViewController() // initialize the simple form controller
+        let textNumberViewController = TextNumberSegmentFormViewController() // initialize the simple form controller
         textNumberViewController.formTitle = title
         textNumberViewController.textValue = textValue
         textNumberViewController.textFieldPlaceholder = textPlaceholder
         textNumberViewController.numberValue = numberValue
         textNumberViewController.numberTextFieldPlaceholder = numberPlaceholder
+        textNumberViewController.selectedSaleType = saleType
         // set the completion for when a user affirms the changes in the simple text field form vc
-        textNumberViewController.submitCompletion = { text, double in
-            submitCompletion?(modalVC, text, double) // call the passed in completion
+        textNumberViewController.submitCompletion = { text, double, saleType in
+            submitCompletion?(modalVC, text, double, saleType) // call the passed in completion
         }
         modalVC.setContainer(viewController: textNumberViewController) // set the form controller on the modal vc
         modalVC.modalPresentationStyle = .overCurrentContext // we want the main view visible under the modal

@@ -77,7 +77,7 @@ class ModalFormContainerViewController: AppViewController {
         cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.addTarget(self, action: #selector(self.onCancel), for: .primaryActionTriggered)
         let affirmButton = AppButton()
-        affirmButton.setTitle("Affirm", for: .normal)
+        affirmButton.setTitle("Create", for: .normal)
         affirmButton.appButtonType = .simpleButton(textColor: .white, bgColor: System.theme.seconaryGreen)
         affirmButton.addTarget(self, action: #selector(self.onAffirm), for: .primaryActionTriggered)
         self.buttonStack.addArrangedSubview(cancelButton)

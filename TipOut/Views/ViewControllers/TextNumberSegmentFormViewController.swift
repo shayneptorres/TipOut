@@ -8,11 +8,12 @@
 
 import UIKit
 
-class TextNumberFormViewController: AppFormViewController, UITextFieldDelegate {
+class TextNumberSegmentFormViewController: AppFormViewController, UITextFieldDelegate {
     private let titleLabel = AppLabel()
     private let textField = AppTextField()
     private let numberTextField = AppTextField()
-    var submitCompletion: ((String, Double) -> ())?
+    private let salesTypeSegment = UISegmentedControl()
+    var submitCompletion: ((String, Double, TipOut.SaleType) -> ())?
     var formTitle: String? {
         didSet {
             self.titleLabel.text = self.formTitle
@@ -36,6 +37,11 @@ class TextNumberFormViewController: AppFormViewController, UITextFieldDelegate {
     var numberTextFieldPlaceholder: String? {
         didSet {
             self.numberTextField.placeholder = self.numberTextFieldPlaceholder
+        }
+    }
+    var selectedSaleType: TipOut.SaleType? {
+        didSet {
+            self.salesTypeSegment.selectedSegmentIndex = self.selectedSaleType?.rawValue ?? 0
         }
     }
     
@@ -70,6 +76,14 @@ class TextNumberFormViewController: AppFormViewController, UITextFieldDelegate {
         self.numberTextField.delegate = self
         self.numberTextField.clearButtonMode = .always
         
+        // setup segment control
+        self.view.addSubview(self.salesTypeSegment)
+        self.salesTypeSegment.translatesAutoresizingMaskIntoConstraints = false
+        
+        for (index, type) in TipOut.SaleType.AllCases().enumerated() {
+            self.salesTypeSegment.insertSegment(withTitle: type.displayName, at: index, animated: false)
+        }
+        
         NSLayoutConstraint.activate([
             // Title label contraints
             self.titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 8),
@@ -85,15 +99,24 @@ class TextNumberFormViewController: AppFormViewController, UITextFieldDelegate {
             self.numberTextField.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 8),
             self.numberTextField.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 8),
             self.numberTextField.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -8),
-            self.numberTextField.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
             self.numberTextField.heightAnchor.constraint(equalToConstant: 45),
+            // sales type segment control
+            self.salesTypeSegment.topAnchor.constraint(equalTo: self.numberTextField.bottomAnchor, constant: 8),
+            self.salesTypeSegment.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 8),
+            self.salesTypeSegment.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -8),
+            self.salesTypeSegment.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+            self.salesTypeSegment.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
     
     override func onAffirm() {
-        guard let text = self.textField.text, let number = Double(self.numberTextField.text ?? "0") else { return }
+        guard
+            let text = self.textField.text,
+            let number = Double(self.numberTextField.text ?? "0"),
+            let saleType = TipOut.SaleType(rawValue: self.salesTypeSegment.selectedSegmentIndex)
+        else { return }
         
-        self.submitCompletion?(text, number)
+        self.submitCompletion?(text, number, saleType)
     }
     
     // MARK: - UITextFieldDelegate Methods

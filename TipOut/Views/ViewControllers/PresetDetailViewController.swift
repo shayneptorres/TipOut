@@ -48,7 +48,7 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
     
     // MARK: - Actions
     @objc func onAdd() {
-        self.showTextNumberForm(title: "Add Person", textPlaceholder: "Enter name", numberPlaceholder: "Enter tip percentage (less than 100)") { modal, name, tipPercent in
+        self.showTextNumberForm(title: "Add Person", textPlaceholder: "Enter name", numberPlaceholder: "Enter tip percentage (less than 100)") { modal, name, tipPercent, saleType in
             DataManager.performChanges { context in
                 guard let parentPreset = self.preset else { return }
                 
@@ -99,10 +99,11 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tipOut = self.tipOuts[indexPath.row] // grab the selected tipout
-        self.showTextNumberForm(title: "Update \(tipOut.name)", textValue: tipOut.name, textPlaceholder: "Enter name", numberValue: tipOut.tipPercentage, numberPlaceholder: "Enter tip percentage (less than 100)") { modal, name, tipPercent in
+        self.showTextNumberForm(title: "Update \(tipOut.name)", textValue: tipOut.name, textPlaceholder: "Enter name", numberValue: tipOut.tipPercentage, numberPlaceholder: "Enter tip percentage (less than 100)", saleType: tipOut.saleTipType) { modal, name, tipPercent, saleType in
             DataManager.performChanges { context in
                 tipOut.name = name
                 tipOut.tipPercentage = tipPercent
+                tipOut.saleTipType = saleType
                 modal.dismiss(animated: true)
             }
         }
