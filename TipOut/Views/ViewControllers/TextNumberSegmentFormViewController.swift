@@ -51,6 +51,12 @@ class TextNumberSegmentFormViewController: AppFormViewController, UITextFieldDel
         self.setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.salesTypeSegment.selectedSegmentIndex = self.selectedSaleType?.rawValue ?? 0
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -80,7 +86,7 @@ class TextNumberSegmentFormViewController: AppFormViewController, UITextFieldDel
         self.view.addSubview(self.salesTypeSegment)
         self.salesTypeSegment.translatesAutoresizingMaskIntoConstraints = false
         
-        for (index, type) in TipOut.SaleType.AllCases().enumerated() {
+        for (index, type) in TipOut.SaleType.allCases.enumerated() {
             self.salesTypeSegment.insertSegment(withTitle: type.displayName, at: index, animated: false)
         }
         

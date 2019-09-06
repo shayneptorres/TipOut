@@ -112,7 +112,7 @@ class TipOutTableViewController: AppTableViewController {
         cell.textLabel?.text = tipOut.name
         let formattedDollar = String(format: "%.2f", tipDisplayValue)
         let formattedPercent = String(format: "%.2f", tipOut.tipPercentage)
-        cell.detailTextLabel?.text = "(\(formattedPercent)%)  $\(formattedDollar)"
+        cell.detailTextLabel?.text = mode == .activeTipout ? "(\(formattedPercent)%)  $\(formattedDollar)" : "\(formattedPercent)%"
         cell.detailTextLabel?.textColor = .red
         return cell
     }
@@ -125,13 +125,13 @@ class TipOutTableViewController: AppTableViewController {
         switch sectionType {
         case .totalSales:
             leftRightDetailHeader.leftDetailText = "Total Sales Tips"
-            leftRightDetailHeader.rightDetailText = nil
+            leftRightDetailHeader.rightDetailText = "Tip Percent (%)"
         case .foodSales:
             leftRightDetailHeader.leftDetailText = "Food Sales Tips"
-            leftRightDetailHeader.rightDetailText = nil
+            leftRightDetailHeader.rightDetailText = "Tip Percent (%)"
         case .header:
             leftRightDetailHeader.leftDetailText = "Person Name"
-            leftRightDetailHeader.rightDetailText = "Tip Amount ($)"
+            leftRightDetailHeader.rightDetailText = "Tip Percent (%)"
         }
         return leftRightDetailHeader
     }
@@ -149,7 +149,7 @@ class TipOutTableViewController: AppTableViewController {
             return
         }
         
-        self.showTextNumberForm(title: "Update \(tipOut.name)", textValue: tipOut.name, textPlaceholder: "Enter name", numberValue: tipOut.tipPercentage, numberPlaceholder: "Enter tip percentage (less than 100)", saleType: tipOut.saleTipType) { modal, name, tipPercent, saleType in
+        self.showTextNumberForm(mode: .update, title: "Update \(tipOut.name)", textValue: tipOut.name, textPlaceholder: "Enter name", numberValue: tipOut.tipPercentage, numberPlaceholder: "Enter tip percentage (less than 100)", saleType: tipOut.saleTipType) { modal, name, tipPercent, saleType in
             DataManager.performChanges { context in
                 tipOut.name = name
                 tipOut.tipPercentage = tipPercent

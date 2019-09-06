@@ -72,7 +72,7 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
     }
     
     @objc func onEdit() {
-        self.showSimpleForm(title: "Edit Preset Name", textValue: self.preset?.name ?? "", placeholder: "Preset name") { modal, name in
+        self.showSimpleForm(title: "Update Preset Name", textValue: self.preset?.name ?? "", placeholder: "Preset name") { modal, name in
             DataManager.performChanges { context in
                 self.preset?.name = name
                 modal.dismiss(animated: true)

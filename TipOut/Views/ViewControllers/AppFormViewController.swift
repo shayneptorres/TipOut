@@ -9,6 +9,11 @@
 import UIKit
 
 class AppFormViewController: AppViewController {
+    enum Mode {
+        case update
+        case create
+    }
+    var mode: Mode = .create
     func onAffirm() {
         // implement in subclass
     }

@@ -27,9 +27,10 @@ class AppTableViewController: UITableViewController {
     }
     
     // Form Methods
-    func showTextNumberForm(title: String? = nil, textValue: String? = nil, textPlaceholder: String? = nil, numberValue: Double? = nil, numberPlaceholder: String? = nil, saleType: TipOut.SaleType = .total, submitCompletion: ((ModalFormContainerViewController, String, Double, TipOut.SaleType)->())? = nil) {
+    func showTextNumberForm(mode: AppFormViewController.Mode, title: String? = nil, textValue: String? = nil, textPlaceholder: String? = nil, numberValue: Double? = nil, numberPlaceholder: String? = nil, saleType: TipOut.SaleType = .total, submitCompletion: ((ModalFormContainerViewController, String, Double, TipOut.SaleType)->())? = nil) {
         let modalVC = ModalFormContainerViewController() // initialize the modal controller
         let textNumberViewController = TextNumberSegmentFormViewController() // initialize the simple form controller
+        textNumberViewController.mode = mode
         textNumberViewController.formTitle = title
         textNumberViewController.textValue = textValue
         textNumberViewController.textFieldPlaceholder = textPlaceholder
