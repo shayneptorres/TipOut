@@ -15,10 +15,16 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
     override var registeredTableHeaderFooterViews: [UITableViewHeaderFooterView.Type] {
         return [LeftDetailRightDetailHeaderView.self]
     }
-    var preset: TipPreset?
+    var preset: TipPreset? {
+        didSet {
+            self.tipoutTableViewController.preset = self.preset
+        }
+    }
     var tipOuts: [TipOut] {
         return Array(self.preset?.tipOuts.sorted(by: { $0.createdAt < $1.createdAt }) ?? [])
     }
+    let tipoutTableViewController = TipOutTableViewController()
+    let tipoutContainerView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +32,13 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
         // set the title to the name of the preset
         self.title = self.preset?.name ?? "No Name"
         // sets up the fullscreen table view
-        self.setFullScreenTableView()
+        self.view.addSubview(self.tipoutContainerView)
+        self.tipoutContainerView.constrainEdgesToSuperView()
+        self.tipoutContainerView.addSubview(self.tipoutTableViewController.view)
+        self.tipoutTableViewController.view.constrainEdgesToSuperView()
+        self.tipoutTableViewController.mode = .presetDetail
+        self.addChild(self.tipoutTableViewController)
+        
         // Setup nav bar buttons
         self.navigationItem.rightBarButtonItems = [
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.onAdd)),
@@ -70,65 +82,11 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
     
     func onDidSave(_ notification: Notification) {
         self.updateUI()
-        self.tableView?.reloadData()
+        self.tipoutTableViewController.tableView.reloadData()
     }
     
     func onDidUpdate(_ notification: Notification) {
         self.updateUI()
-        self.tableView?.reloadData()
-    }
-    
-    // MARK: - TableView Methods
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tipOuts.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.deque(cell: LabelRightDetailCell.self, for: indexPath)
-        let tipOut = self.tipOuts[indexPath.row]
-        cell.textLabel?.text = tipOut.name
-        let formattedPercent = String(format: "%.2f", tipOut.tipPercentage)
-        cell.detailTextLabel?.text = "\(formattedPercent)%"
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let tipOut = self.tipOuts[indexPath.row] // grab the selected tipout
-        self.showTextNumberForm(title: "Update \(tipOut.name)", textValue: tipOut.name, textPlaceholder: "Enter name", numberValue: tipOut.tipPercentage, numberPlaceholder: "Enter tip percentage (less than 100)", saleType: tipOut.saleTipType) { modal, name, tipPercent, saleType in
-            DataManager.performChanges { context in
-                tipOut.name = name
-                tipOut.tipPercentage = tipPercent
-                tipOut.saleTipType = saleType
-                modal.dismiss(animated: true)
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return UITableViewCell.EditingStyle.delete // allow the swipe deletion of preset cells
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        switch editingStyle {
-        case .delete:
-            let tipOut = self.tipOuts[indexPath.row]
-            DataManager.performChanges { context in
-                tipOut.managedObjectContext?.delete(tipOut) // delete the object from the managed context
-            }
-        default:
-            break
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let leftRightDetailHeader = tableView.deque(headerFooterView: LeftDetailRightDetailHeaderView.self)
-        leftRightDetailHeader.leftDetailText = "Person Name"
-        leftRightDetailHeader.rightDetailText = "Tip Percent (%)"
-        return leftRightDetailHeader
+        self.tipoutTableViewController.tableView.reloadData()
     }
 }

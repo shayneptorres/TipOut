@@ -10,8 +10,16 @@ import UIKit
 
 extension UIView {
     
-    func addShadow() {
+    func constrainEdgesToSuperView() {
+        guard let container = self.superview else { return }
         
+        self.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: container.topAnchor),
+            self.leftAnchor.constraint(equalTo: container.leftAnchor),
+            self.rightAnchor.constraint(equalTo: container.rightAnchor),
+            self.bottomAnchor.constraint(equalTo: container.bottomAnchor),
+        ])
     }
     
 }

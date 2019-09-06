@@ -14,7 +14,12 @@ class TipOutTableViewController: AppTableViewController {
         case foodSales
         case header // make sure header is last, dont let it get confused with the enum values
     }
+    enum Mode {
+        case activeTipout
+        case presetDetail
+    }
     
+    var mode: Mode = .activeTipout
     var sections: [SectionType] = [.totalSales, .foodSales]
     var preset: TipPreset? {
         didSet {
@@ -22,7 +27,7 @@ class TipOutTableViewController: AppTableViewController {
         }
     }
     var allTipouts: [TipOut] {
-        return Array(self.preset?.tipOuts ?? [])
+        return Array(self.preset?.tipOuts.sorted(by: { $0.createdAt < $1.createdAt }) ?? [])
     }
     var totalSalesTipouts: [TipOut] {
         return self.allTipouts.filter { TipOut.SaleType(rawValue: $0.saleTipTypeValue) == .total }
@@ -38,6 +43,16 @@ class TipOutTableViewController: AppTableViewController {
     var foodSales: Double = 0 {
         didSet {
             self.tableView.reloadData()
+        }
+    }
+    var shouldAllowEditing: Bool {
+        switch self.mode {
+        case .activeTipout:
+            // user is on the main active tipouts screen
+            return false
+        case .presetDetail:
+            // user is looking at preset details
+            return true
         }
     }
     
@@ -94,7 +109,6 @@ class TipOutTableViewController: AppTableViewController {
             return cell
         }
         
-        
         cell.textLabel?.text = tipOut.name
         let formattedDollar = String(format: "%.2f", tipDisplayValue)
         let formattedPercent = String(format: "%.2f", tipOut.tipPercentage)
@@ -120,5 +134,58 @@ class TipOutTableViewController: AppTableViewController {
             leftRightDetailHeader.rightDetailText = "Tip Amount ($)"
         }
         return leftRightDetailHeader
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard self.shouldAllowEditing, let sectionType = SectionType(rawValue: indexPath.section) else { return }
+        
+        var tipOut: TipOut
+        switch sectionType {
+        case .totalSales:
+            tipOut = self.totalSalesTipouts[indexPath.row]
+        case .foodSales:
+            tipOut = self.foodTipouts[indexPath.row]
+        case .header:
+            return
+        }
+        
+        self.showTextNumberForm(title: "Update \(tipOut.name)", textValue: tipOut.name, textPlaceholder: "Enter name", numberValue: tipOut.tipPercentage, numberPlaceholder: "Enter tip percentage (less than 100)", saleType: tipOut.saleTipType) { modal, name, tipPercent, saleType in
+            DataManager.performChanges { context in
+                tipOut.name = name
+                tipOut.tipPercentage = tipPercent
+                tipOut.saleTipType = saleType
+                modal.dismiss(animated: true)
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if self.shouldAllowEditing {
+            return UITableViewCell.EditingStyle.delete // allow the swipe deletion of preset cells
+        }
+        return .none
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard self.shouldAllowEditing, let sectionType = SectionType(rawValue: indexPath.section) else { return }
+    
+        var tipOut: TipOut
+        switch sectionType {
+        case .totalSales:
+            tipOut = self.totalSalesTipouts[indexPath.row]
+        case .foodSales:
+            tipOut = self.foodTipouts[indexPath.row]
+        case .header:
+            return
+        }
+        
+        switch editingStyle {
+        case .delete:
+            DataManager.performChanges { context in
+                tipOut.managedObjectContext?.delete(tipOut) // delete the object from the managed context
+            }
+        default:
+            break
+        }
     }
 }
