@@ -23,7 +23,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-554" y="856"/>
+            <point key="canvasLocation" x="-1391" y="856"/>
         </scene>
         <!--Presets List View Controller-->
         <scene sceneID="xNA-qW-adq">
@@ -39,7 +39,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EdL-Lk-qHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1206" y="856"/>
+            <point key="canvasLocation" x="199" y="856"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="80h-0E-g7L">
+            <objects>
+                <viewController id="Cj7-A1-95R" customClass="SettingsViewController" customModule="TipOut" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iYO-Kt-2Y6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="u9F-7m-BhY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lOe-fz-xM1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8KN-8J-6nw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1714" y="856"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="9Wj-dP-ULN">
@@ -54,6 +70,7 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="7wk-Fh-uyK"/>
                         <segue destination="Ej2-8t-9kU" kind="relationship" relationship="viewControllers" id="qFO-fQ-fue"/>
+                        <segue destination="kkF-1Y-pt5" kind="relationship" relationship="viewControllers" id="YOV-ip-n8M"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UvO-Jz-eny" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -77,11 +94,31 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bt7-v6-6sl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="489.85507246376818" y="855.80357142857144"/>
+            <point key="canvasLocation" x="-471" y="856"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="WZa-NM-dP1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kkF-1Y-pt5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="icSettings" id="ROT-ax-c9R"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TIb-Aw-Fnj">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Cj7-A1-95R" kind="relationship" relationship="rootViewController" id="FVj-pF-cKe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fsh-Px-bQA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1070" y="856"/>
         </scene>
     </scenes>
     <resources>
         <image name="dollar" width="34" height="25"/>
+        <image name="icSettings" width="34" height="24"/>
         <image name="list" width="34" height="25"/>
     </resources>
 </document>

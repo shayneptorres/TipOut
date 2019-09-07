@@ -46,6 +46,8 @@ class TipOutTableViewController: AppTableViewController {
         }
     }
     var shouldAllowEditing: Bool {
+        guard self.preset?.isDefault == false else { return false }
+        
         switch self.mode {
         case .activeTipout:
             // user is on the main active tipouts screen

@@ -22,7 +22,7 @@ class DataManager {
     static func seedDB(completion: ((TipPreset)->())? = nil) {
         DataManager.performChanges { context in
             // setup default servers preset
-            let defaultServersPreset = TipPreset.insert(into: context, name: "Servers")
+            let defaultServersPreset = TipPreset.insert(into: context, name: "Servers", isDefault: true)
             let defaultServersTipOuts = [
                 TipOut.insert(into: context, name: "HOH", tipType: 1, tipPercentage: 2, preset: defaultServersPreset),
                 TipOut.insert(into: context, name: "Bar", tipPercentage: 1.5, preset: defaultServersPreset),
@@ -34,7 +34,7 @@ class DataManager {
                 defaultServersPreset.tipOuts.insert(tipout)
             }
             
-            let defaultBarPreset = TipPreset.insert(into: context, name: "Bar")
+            let defaultBarPreset = TipPreset.insert(into: context, name: "Bar", isDefault: true)
             let defaultBarTipOuts = [
                 TipOut.insert(into: context, name: "HOH", tipType: 1, tipPercentage: 2, preset: defaultServersPreset),
                 TipOut.insert(into: context, name: "Barback", tipPercentage: 3, preset: defaultServersPreset),

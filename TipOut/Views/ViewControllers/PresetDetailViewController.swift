@@ -40,10 +40,13 @@ class PresetDetailViewController: AppViewController, DataChangeDelegate {
         self.addChild(self.tipoutTableViewController)
         
         // Setup nav bar buttons
-        self.navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.onAdd)),
-            UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(self.onEdit))
-        ]
+        if self.preset?.isDefault == false {
+            self.navigationItem.rightBarButtonItems = [
+                UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.onAdd)),
+                UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(self.onEdit))
+            ]
+        }
+        
         // begin observing
         self.setupObervers()
     }

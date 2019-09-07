@@ -25,6 +25,6 @@ class LabelRightDetailCell: UITableViewCell {
     private func commonInit() {
         self.textLabel?.font = AppFont.normal(font: .medium)
         self.detailTextLabel?.font = AppFont.normal(font: .medium)
-        self.detailTextLabel?.textColor = System.theme.primaryGreen
+        self.detailTextLabel?.textColor = .primaryGreen
     }
 }

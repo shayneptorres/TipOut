@@ -34,6 +34,14 @@ final class TipOut: NSManagedObject, Managed {
     @NSManaged var saleTipTypeValue: Int
     @NSManaged var createdAt: Date
     
+    static func unpersistedInit(name: String, tipPercent: Double, saleTipType: SaleType = .total) -> TipOut {
+        let tipOut = TipOut()
+        tipOut.name = name
+        tipOut.tipPercentage = tipPercent
+        tipOut.saleTipType = saleTipType
+        return tipOut
+    }
+    
     var saleTipType: SaleType {
         set {
             self.saleTipTypeValue = newValue.rawValue

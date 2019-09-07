@@ -46,9 +46,9 @@ class PresetsListViewController: AppViewController, DataChangeDelegate {
         // Update title
         self.title = self.mode == .showDetail ? "Presets" : "Select Active Preset"
         self.view.backgroundColor = .white
-        self.navigationController?.navigationBar.barTintColor = System.theme.primaryBlue
-        self.navigationController?.navigationBar.tintColor = System.theme.primaryWhite
-        let textAttributes = [NSAttributedString.Key.foregroundColor: System.theme.primaryWhite]
+        self.navigationController?.navigationBar.barTintColor = .primaryBlue
+        self.navigationController?.navigationBar.tintColor = .primaryWhite
+        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.primaryWhite]
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes
         
         // Setup nav bar buttons
@@ -78,8 +78,6 @@ class PresetsListViewController: AppViewController, DataChangeDelegate {
                 table.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
                 ])
         case .setActive:
-//            self.view.addSubview(self.buttonStack)
-//            self.buttonStack.translatesAutoresizingMaskIntoConstraints = false
             let cancelBtn = AppButton()
             cancelBtn.appButtonType = .simpleButton(textColor: .white, bgColor: .lightGray)
             self.view.addSubview(cancelBtn)
@@ -150,7 +148,7 @@ class PresetsListViewController: AppViewController, DataChangeDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.deque(cell: LabelRightDetailCell.self, for: indexPath)
         let preset = self.presets[indexPath.row]
-        cell.textLabel?.text = preset.name
+        cell.textLabel?.text = preset.isDefault ? preset.name + " (Default)" : preset.name
         cell.accessoryType = .disclosureIndicator
         
         return cell
@@ -179,9 +177,24 @@ class PresetsListViewController: AppViewController, DataChangeDelegate {
         switch editingStyle {
         case .delete:
             let preset = self.presets[indexPath.row]
-            DataManager.performChanges { context in
-                preset.managedObjectContext?.delete(preset) // delete the object from the managed context
+            
+            // TODO: create alert manager
+            let alertController = UIAlertController(title: "Confirm Deletion", message: "Are you sure you want to delete this preset?", preferredStyle: .alert)
+            let confirm = UIAlertAction(title: "Delete", style: .destructive) { ok in
+                DataManager.performChanges { context in
+                    if preset.isDefault {
+                        preset.isArchived = true
+                    }
+                    else {
+                        // only delete preset if it is not a default one
+                        preset.managedObjectContext?.delete(preset)
+                    }
+                }
             }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+            alertController.addAction(confirm)
+            alertController.addAction(cancel)
+            self.present(alertController, animated: true)
         default:
             break
         }

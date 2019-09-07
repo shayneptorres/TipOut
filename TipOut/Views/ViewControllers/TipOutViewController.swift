@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TipOutViewController: AppViewController {
+class TipOutViewController: AppViewController, DataChangeDelegate {
     
     enum SectionType: Int {
         case totalSales = 0
@@ -50,6 +50,8 @@ class TipOutViewController: AppViewController {
 
         self.setupViews() // setup views
         
+        self.setupObervers()
+        
         guard UserDefaultsManager.get(.shouldSetDefaultPresets) == nil else { return }
         
         DataManager.seedDB { preset in
@@ -60,30 +62,52 @@ class TipOutViewController: AppViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard
-            let activeStrId = UserDefaultsManager.get(.activePresetID) as? String,
-            let activeUUID = UUID(uuidString: activeStrId),
-            let activePreset = TipPreset.getOne(with: activeUUID)
-        else {
-            self.preset = nil
-            return
-        }
-        
-        self.preset = activePreset
+        self.updatePreset()
+    }
+    
+    deinit {
+        self.removeObservers()
     }
     
     // MARK: - Helpers
     
+    private func updatePreset() {
+        guard
+            let activeStrId = UserDefaultsManager.get(.activePresetID) as? String,
+            let activeUUID = UUID(uuidString: activeStrId),
+            let activePreset = TipPreset.getOne(with: activeUUID)
+            else {
+                self.preset = nil
+                return
+        }
+        
+        if self.preset?.isArchived == true {
+            self.preset = nil
+            UserDefaultsManager.set(.activePresetID, value: nil)
+        }
+        else {
+            self.preset = activePreset
+        }
+    }
+    
+    func onDidSave(_ notification: Notification) {
+        self.updatePreset() // reload data to reflect current state
+    }
+    
+    func onDidUpdate(_ notification: Notification) {
+        self.updatePreset() // reload data to reflect current state
+    }
+    
     func setupViews() {
-        self.view.backgroundColor = System.theme.primaryBlue
-        self.tabBarController?.tabBar.barTintColor = System.theme.secondaryGray
+        self.view.backgroundColor = .primaryBlue
+        self.tabBarController?.tabBar.barTintColor = .secondaryGray
         
         // Setup header label
         self.view.addSubview(self.headerLabel)
         self.headerLabel.translatesAutoresizingMaskIntoConstraints = false
         self.headerLabel.text = "Tip Outs"
         self.headerLabel.font = AppFont.normal(font: .header)
-        self.headerLabel.textColor = System.theme.primaryWhite
+        self.headerLabel.textColor = .primaryWhite
         
         // Setup preset label
         self.view.addSubview(self.presetNameLabel)
@@ -97,7 +121,7 @@ class TipOutViewController: AppViewController {
         let buttonTitle: String = self.preset != nil ? "Change" : "Set Preset"
         self.changePresetButton.setTitle(buttonTitle, for: .normal)
         self.changePresetButton.appButtonType = .defaultButton
-        self.changePresetButton.setTitleColor(System.theme.secondaryBlue, for: .normal)
+        self.changePresetButton.setTitleColor(.secondaryBlue, for: .normal)
         
         // Setup preset label/button stack
         let presetLabelButtonStack = UIStackView(arrangedSubviews: [self.presetNameLabel, self.changePresetButton])

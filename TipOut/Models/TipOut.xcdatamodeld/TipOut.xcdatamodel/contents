@@ -11,11 +11,13 @@
     <entity name="TipPreset" representedClassName=".TipPreset" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isArchived" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="tipOuts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TipOut" inverseName="parentPreset" inverseEntity="TipOut" syncable="YES"/>
     </entity>
     <elements>
         <element name="TipOut" positionX="-63" positionY="0" width="128" height="135"/>
-        <element name="TipPreset" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="TipPreset" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

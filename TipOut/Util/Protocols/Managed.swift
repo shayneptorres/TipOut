@@ -22,6 +22,7 @@ extension Managed where Self: NSManagedObject {
     
     static func getAll(in context: NSManagedObjectContext, configurationBlock: (NSFetchRequest<Self>) -> () = { _ in }) -> [Self] {
         let req = request
+        req.predicate = NSPredicate(format: "isArchived = %@", argumentArray: [false])
         configurationBlock(req)
         
         do {

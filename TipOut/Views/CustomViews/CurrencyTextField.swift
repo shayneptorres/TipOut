@@ -25,11 +25,11 @@ class CurrencyTextField: AppTextField, UITextFieldDelegate {
         super.commonInit()
         
         self.textAlignment = .right
-        self.textColor = System.theme.seconaryGreen
-        self.backgroundColor = System.theme.secondaryGray
+        self.textColor = .seconaryGreen
+        self.backgroundColor = .secondaryGray
         self.attributedPlaceholder = NSAttributedString(
             string: "Tap to enter total",
-            attributes: [NSAttributedString.Key.foregroundColor: System.theme.primaryBlack])
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.primaryBlack])
         self.keyboardType = .numberPad
         self.delegate = self
         self.font = AppFont.normal(font: .xLarge)
